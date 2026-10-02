@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; connect-src ws: wss:; img-src 'self' file: data:; style-src 'self'; script-src 'self'"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>猫咪桌面宠物</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main id="petRoot" class="pet-root" data-connected="false">
+      <div class="drag-handle" title="拖动窗口"></div>
+      <button id="petButton" class="pet-button" type="button" title="双击设置，右键菜单">
+        <img
+          id="petGif"
+          class="pet-gif"
+          src="../../public/pets/v2/resting_candidate_sleep.gif"
+          alt="猫咪静息动画"
+          draggable="false"
+        />
+      </button>
+
+      <span id="batteryStatus" class="battery-status" aria-live="polite" hidden>
+        电量 --%
+      </span>
+
+      <section id="connectionNotice" class="connection-notice" aria-live="polite" hidden>
+        <p id="connectionMessage">正在连接…</p>
+        <div class="connection-actions">
+          <button id="openConnectionSettings" type="button">连接设置</button>
+          <button id="retryConnection" type="button">立即重试</button>
+        </div>
+      </section>
+
+      <span id="liveStatus" class="visually-hidden" aria-live="polite"></span>
+
+      <section id="settings" class="settings-backdrop" aria-label="连接设置">
+        <form id="settingsForm" class="settings-card">
+          <button
+            id="closeWindow"
+            class="window-close"
+            type="button"
+            aria-label="退出猫咪桌面宠物"
+            title="退出"
+          >
+            &times;
+          </button>
+          <h1>连接猫咪状态</h1>
+          <p>保存后桌面只显示猫咪。双击猫咪或右键菜单可重新设置。</p>
+
+          <label>
+            WebSocket 地址
+            <input
+              id="webSocketUrl"
+              placeholder="ws://203.0.113.10:8787/ws"
+              autocomplete="url"
+            />
+          </label>
+
+          <label>
+            设备编号
+            <input id="deviceId" value="cat-01" autocomplete="off" />
+          </label>
+
+          <label class="pet-size-setting" for="petSize">
+            <span class="setting-heading">
+              <span>宠物大小</span>
+              <output id="petSizeValue" for="petSize">240 px</output>
+            </span>
+            <input id="petSize" type="range" min="160" max="420" step="1" value="240" />
+          </label>
+
+          <p id="configError" class="config-error" role="alert"></p>
+
+          <div class="settings-actions">
+            <button id="cancelSettings" class="secondary" type="button">取消</button>
+            <button type="submit">保存</button>
+          </div>
+        </form>
+      </section>
+    </main>
+    <script src="renderer.js"></script>
+  </body>
+</html>

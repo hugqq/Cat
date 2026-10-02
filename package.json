@@ -1,0 +1,39 @@
+{
+  "name": "cat-live-pet",
+  "version": "1.0.0",
+  "private": true,
+  "description": "透明置顶的猫咪桌面宠物",
+  "author": "33047",
+  "main": "electron/main.cjs",
+  "scripts": {
+    "electron:dev": "electron .",
+    "electron:pack": "pwsh -NoProfile -ExecutionPolicy Bypass -File scripts/build-electron.ps1"
+  },
+  "devDependencies": {
+    "electron": "^43.2.0",
+    "electron-builder": "^26.15.3"
+  },
+  "build": {
+    "appId": "com.catlivepet.desktop",
+    "productName": "猫咪桌面宠物",
+    "directories": {
+      "output": "desktop-release"
+    },
+    "files": [
+      "electron/**/*",
+      "public/pets/**/*",
+      "public/favicon.svg",
+      "package.json"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    }
+  }
+}
